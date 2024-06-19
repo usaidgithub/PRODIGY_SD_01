@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        input, select, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .result {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temperature Converter</h1>
+    <input type="number" id="temperatureInput" placeholder="Enter temperature">
+    <select id="unitSelect">
+        <option value="C">Celsius (°C)</option>
+        <option value="F">Fahrenheit (°F)</option>
+        <option value="K">Kelvin (K)</option>
+    </select>
+    <button onclick="convertTemperature()">Convert</button>
+    <div id="results">
+        <p class="result" id="celsiusResult"></p>
+        <p class="result" id="fahrenheitResult"></p>
+        <p class="result" id="kelvinResult"></p>
+    </div>
+    <script>
+        function convertTemperature(){
+            var input=parseFloat(document.getElementById('temperatureInput').value)
+            var unit=document.getElementById('unitSelect').value
+            let celcius,fahrenhiet,kelvin
+            if(unit=="C"){
+                celcius=input;
+                fahrenhiet=(1.8*input)+32
+                kelvin=input+273.15
+            }
+            else if(unit=="F"){
+                celcius=(input-32)*(5/9)
+                fahrenhiet=input
+                kelvin=(input-32)*(5/9)+273.15
+            }
+            else if(unit=="K"){
+                celcius=input-273.15
+                fahrenhiet=(input-273.15)*(9/5)+32
+                kelvin=input
+            }
+            celsiusresult=document.getElementById('celsiusResult')
+            fahrenhietresult=document.getElementById('fahrenheitResult')
+            kelvinresult=document.getElementById('kelvinResult')
+            celsiusresult.innerText=`The temperature in celsius is ${celcius.toFixed(2)}°C`
+            fahrenhietresult.innerText=`The temperature is fahrenhiet is ${fahrenhiet.toFixed(2)}°F`
+            kelvinresult.innerText=`The temperature in kelvin is ${kelvin.toFixed(2)}K`
+        }
+    </script>
+</body>
